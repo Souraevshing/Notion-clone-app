@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+/**
+ * @description custom hook to know if user has scrolled
+ */
 const useScrollTop = (threshold = 10) => {
   const [scrolled, setScrolled] = useState(false);
 

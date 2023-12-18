@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useConvexAuth } from "convex/react";
 import { ArrowRightIcon } from "lucide-react";
+import { SignInButton } from "@clerk/clerk-react";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/spinner";
@@ -17,7 +19,8 @@ const Heading = () => {
           <span
             style={{
               textTransform: "uppercase",
-              background: "linear-gradient(to right, #ff99c8 0%, #880d1e 100%)",
+              background:
+                "linear-gradient(to right, #86198f 0%, #15803d 50%, #b91c1c 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
             }}
@@ -35,10 +38,22 @@ const Heading = () => {
           </div>
         )}
         {isAuthenticated && !isLoading && (
-          <Button>
-            Enter Jotion
-            <ArrowRightIcon className="h-4 w-4 ml-2" />
+          <Button asChild className="font-medium">
+            <Link href="/documents">
+              Enter Jotion
+              <ArrowRightIcon className="h-4 w-4 ml-2" />
+            </Link>
           </Button>
+        )}
+        {!isAuthenticated && !isLoading && (
+          <>
+            <SignInButton mode="modal">
+              <Button>
+                Get Jotion
+                <ArrowRightIcon className="h-4 w-4 ml-2" />
+              </Button>
+            </SignInButton>
+          </>
         )}
       </div>
     </>

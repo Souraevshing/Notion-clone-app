@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
-import { Ubuntu_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 
 import "./globals.css";
 
-const inter = Ubuntu_Mono({ subsets: ["latin"], weight: ["400", "700"] });
+const inter = Inter({
+  subsets: ["cyrillic", "latin"],
+  weight: ["400", "600"],
+});
 
 export const metadata: Metadata = {
   title: "Notion",
