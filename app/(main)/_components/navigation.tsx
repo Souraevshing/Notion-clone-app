@@ -1,17 +1,26 @@
-import { ChevronsLeft, MenuIcon } from "lucide-react";
+import {
+  ChevronsLeft,
+  MenuIcon,
+  PlusCircle,
+  Search,
+  Settings2Icon,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import { useMutation } from "convex/react";
+import { toast } from "sonner";
 
+import { DocumentList } from "./document-list";
 import { cn } from "@/lib/utils";
 import UserItem from "./user-item";
-import { useQuery } from "convex/react";
+import Item from "./item";
 import { api } from "@/convex/_generated/api";
 
 const Navigation = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width:768px)"); //media query for mobile devices
-  const documents = useQuery(api.documents.getAllNotes);
+  const createNote = useMutation(api.documents.createNote);
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -127,12 +136,22 @@ const Navigation = () => {
     }
   }, [pathname, isMobile]);
 
+  const handleCreateNote = () => {
+    const promise = createNote({ title: "Untitled" });
+
+    toast.promise(promise, {
+      loading: "Creating note...",
+      success: "Success!",
+      error: "Something went wrong!",
+    });
+  };
+
   return (
     <>
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-zinc-700 overflow-y-auto relative flex w-60 flex-col z-[99999]",
+          "group/sidebar h-full dark:bg-zinc-700 overflow-y-auto relative flex w-60 flex-col z-[99999]",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-0"
         )}
@@ -149,11 +168,12 @@ const Navigation = () => {
         </div>
         <div>
           <UserItem />
+          <Item label="Search" icon={Search} isSearch onClick={() => {}} />
+          <Item label="Settings" icon={Settings2Icon} onClick={() => {}} />
+          <Item onClick={handleCreateNote} label="New Page" icon={PlusCircle} />
         </div>
         <div className="mt-4">
-          {documents?.map((doc) => {
-            return <p key={doc._id}>{doc.title}</p>;
-          })}
+          <DocumentList />
         </div>
         <div
           onMouseDown={handleMouseDown}

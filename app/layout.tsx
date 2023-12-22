@@ -47,12 +47,7 @@ export default function RootLayout({
             enableSystem
             storageKey="_themes"
           >
-            <Toaster
-              position="top-right"
-              closeButton={true}
-              loadingIcon={<Spinner />}
-              duration={5000}
-            />
+            <Toaster position="top-right" closeButton={true} duration={2000} />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>
