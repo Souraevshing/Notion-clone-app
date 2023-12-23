@@ -4,16 +4,28 @@ import {
   ChevronDown,
   ChevronRight,
   LucideIcon,
+  MoreHorizontalIcon,
   PlusCircle,
+  Trash,
+  Trash2Icon,
+  TrashIcon,
 } from "lucide-react";
 import { useMutation } from "convex/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useUser } from "@clerk/clerk-react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -44,7 +56,11 @@ const Item = ({
 
   const router = useRouter();
 
+  const user = useUser();
+
   const create = useMutation(api.documents.createNote);
+
+  const archive = useMutation(api.documents.archiveDocuments);
 
   /**
    * @description expand documents with click
@@ -71,6 +87,19 @@ const Item = ({
 
     toast.promise(promise, {
       loading: "Creating note...",
+      success: "Success!",
+      error: "Something went wrong!",
+    });
+  };
+
+  const handleArchive = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!id) {
+      return;
+    }
+    const promise = archive({ id });
+
+    toast.promise(promise, {
+      loading: "Deleting note...",
       success: "Success!",
       error: "Something went wrong!",
     });
@@ -110,12 +139,35 @@ const Item = ({
           </kbd>
         )}
         {!!id && (
-          <div
-            role="button"
-            onClick={handleCreate}
-            className="ml-auto flex items-center gap-x-2"
-          >
-            <div className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:bg-neutral-600">
+          <div className="ml-auto flex items-center gap-x-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger onClick={(e) => e.stopPropagation()} asChild>
+                <div
+                  role="button"
+                  className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-200 dark:hover:bg-neutral-400"
+                >
+                  <MoreHorizontalIcon className="h-4 w-4" />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem
+                  onClick={handleArchive}
+                  className="cursor-pointer"
+                >
+                  <Trash2Icon className="h-4 w-4 mr-2 " />
+                  Delete
+                </DropdownMenuItem>
+
+                <DropdownMenuSeparator />
+                <div>Last edited {user.user?.updatedAt?.getSeconds()}s ago</div>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <div
+              className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-200 dark:bg-neutral-600"
+              role="button"
+              onClick={handleCreate}
+            >
               <PlusCircle className="h-4 w-4 text-muted-foreground" />
             </div>
           </div>

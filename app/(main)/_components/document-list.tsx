@@ -46,7 +46,7 @@ export const DocumentList = ({
    * @description redirect to respective document when clicked
    */
   const handleRedirect = (documentId: string) => {
-    router.push(`/documents/${documentId}`);
+    //router.push(`/documents/${documentId}`);
   };
 
   if (documents === undefined) {

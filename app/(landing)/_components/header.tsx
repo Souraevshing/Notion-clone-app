@@ -15,18 +15,7 @@ const Heading = () => {
     <>
       <div className="max-w-3xl space-y-4">
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold">
-          Welcome to{" "}
-          <span
-            style={{
-              textTransform: "uppercase",
-              background:
-                "linear-gradient(to right, #86198f 0%, #15803d 50%, #b91c1c 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            Jotion
-          </span>
+          Welcome to <span className="rainbow-text">Jotion</span>
         </h1>
         <h3 className="text-base sm:text-xl md:text-2xl font-medium">
           Jotion is the connected workspace where <br />
@@ -56,6 +45,34 @@ const Heading = () => {
           </>
         )}
       </div>
+      <style jsx>{`
+        @keyframes rainbow {
+          0% {
+            color: #f72585;
+          }
+
+          50% {
+            color: #e63946;
+          }
+
+          100% {
+            color: #dc2f02;
+          }
+        }
+
+        .rainbow-text {
+          animation: rainbow 5s infinite; // Adjust the duration as needed
+          text-transform: uppercase;
+          background: linear-gradient(
+            to right,
+            #f72585 0%,
+            #e63946 50%,
+            #dc2f02 100%
+          );
+          -webkit-background-clip: text;
+          transition: color 0.3s ease-in-out;
+        }
+      `}</style>
     </>
   );
 };

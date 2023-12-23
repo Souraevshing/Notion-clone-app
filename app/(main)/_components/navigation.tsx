@@ -2,6 +2,7 @@ import {
   ChevronsLeft,
   MenuIcon,
   PlusCircle,
+  PlusIcon,
   Search,
   Settings2Icon,
 } from "lucide-react";
@@ -174,6 +175,7 @@ const Navigation = () => {
         </div>
         <div className="mt-4">
           <DocumentList />
+          <Item onClick={handleCreateNote} icon={PlusIcon} label="Add a page" />
         </div>
         <div
           onMouseDown={handleMouseDown}
