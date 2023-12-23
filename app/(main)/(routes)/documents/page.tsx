@@ -44,7 +44,10 @@ const Documents = () => {
         <h2 className="text-lg font-medium">
           Welcome to {user?.firstName}&apos;s Jotion
         </h2>
-        <Button onClick={handleCreateNote}>
+        <Button
+          onClick={handleCreateNote}
+          className="transition hover:bg-slate-300 hover:text-slate-800"
+        >
           <LucidePlusCircle className="h-4 w-4 mr-2" /> Create a note
         </Button>
       </div>

@@ -12,7 +12,7 @@ import {
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { ChevronsLeftRight } from "lucide-react";
 
-const UserItem = () => {
+export const UserItem = () => {
   const { user } = useUser();
 
   return (
@@ -69,5 +69,3 @@ const UserItem = () => {
     </>
   );
 };
-
-export default UserItem;

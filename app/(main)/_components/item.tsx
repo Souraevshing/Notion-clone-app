@@ -6,14 +6,13 @@ import {
   LucideIcon,
   MoreHorizontalIcon,
   PlusCircle,
-  Trash,
   Trash2Icon,
-  TrashIcon,
 } from "lucide-react";
 import { useMutation } from "convex/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useUser } from "@clerk/clerk-react";
+import { platform } from "os";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Id } from "@/convex/_generated/dataModel";
@@ -36,11 +35,11 @@ interface ItemProps {
   level?: number;
   onExpand?: () => void;
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
   icon: LucideIcon;
 }
 
-const Item = ({
+export const Item = ({
   id,
   label,
   onClick,
@@ -135,7 +134,24 @@ const Item = ({
         <span className="truncate">{label}</span>
         {isSearch && (
           <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-            <span className="text-xs">&#8984;</span> K
+            {platform() === "win32" ? (
+              <span className="text-xs">
+                {" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 87.3 87.6"
+                  style={{ width: "11px" }}
+                >
+                  <polyline points="0 12.5 35.7 7.6 35.7 42.1 0 42.1" />
+                  <polyline points="40 6.9 87.3 0 87.3 41.8 40 41.8" />
+                  <polyline points="0 45.74 35.7 45.74 35.7 80.34 0 75.34" />
+                  <polyline points="40 46.2 87.3 46.2 87.3 87.6 40 80.9" />
+                </svg>
+              </span>
+            ) : (
+              <span className="text-xs">&#8984;</span>
+            )}
+            K
           </kbd>
         )}
         {!!id && (
@@ -159,7 +175,7 @@ const Item = ({
                 </DropdownMenuItem>
 
                 <DropdownMenuSeparator />
-                <div>Last edited {user.user?.updatedAt?.getSeconds()}s ago</div>
+                <div className="text-xs">Created by {user.user?.fullName}</div>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -176,8 +192,6 @@ const Item = ({
     </>
   );
 };
-
-export default Item;
 
 Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
   return (
