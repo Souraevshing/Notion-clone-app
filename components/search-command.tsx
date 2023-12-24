@@ -5,6 +5,7 @@ import { File } from "lucide-react";
 import { useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/clerk-react";
+import { toast } from "sonner";
 
 import {
   CommandDialog,
@@ -49,6 +50,7 @@ export const SearchCommand = () => {
   };
 
   if (!isMounted) {
+    toast.error("Something went wrong!");
     return null;
   }
 
