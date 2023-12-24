@@ -4,9 +4,8 @@ import { Toaster } from "sonner";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
-
+import { ModalProvider } from "@/components/providers/modal-provider";
 import "./globals.css";
-import { Spinner } from "@/components/spinner";
 
 const inter = Inter({
   subsets: ["cyrillic", "latin"],
@@ -48,6 +47,7 @@ export default function RootLayout({
             storageKey="_themes"
           >
             <Toaster position="top-right" closeButton={true} duration={2000} />
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>

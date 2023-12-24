@@ -24,11 +24,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/user-setting";
 
 const Navigation = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width:768px)"); //media query for mobile devices
   const createNote = useMutation(api.documents.createNote);
+
+  const search = useSearch();
+  const settings = useSettings();
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -176,8 +181,12 @@ const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={() => {}} />
-          <Item label="Settings" icon={Settings2Icon} onClick={() => {}} />
+          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
+          <Item
+            label="Settings"
+            icon={Settings2Icon}
+            onClick={settings.onOpen}
+          />
           <Item onClick={handleCreateNote} label="New Page" icon={PlusCircle} />
         </div>
         <div className="mt-4">

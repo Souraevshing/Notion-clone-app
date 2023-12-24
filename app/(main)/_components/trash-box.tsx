@@ -94,13 +94,13 @@ export const TrashBox = () => {
                 role="button"
                 key={doc._id}
                 onClick={() => handleClick(doc._id)}
-                className="text-sm rounded-sm w-full hover:bg-primary/5 flex items-center text-primary justify-between"
+                className="cursor-pointer text-sm rounded-sm w-full hover:bg-primary/5 flex items-center text-primary justify-between"
               >
                 <span>{doc.title}</span>
                 <div className="flex items-center">
                   <div
                     role="button"
-                    className="rounded-sm p-2 hover:bg-neutral-200"
+                    className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
                     onClick={(e) => handleRestore(e, doc._id)}
                   >
                     <Undo2Icon className="h-4 w-4 text-muted-foreground" />
@@ -108,7 +108,7 @@ export const TrashBox = () => {
                   <ConfirmModal onConfirm={() => handleDelete(doc._id)}>
                     <div
                       role="button"
-                      className="rounded-sm p-2 hover:bg-neutral-200"
+                      className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
                     >
                       <Trash2Icon className="h-4 w-4 text-muted-foreground" />
                     </div>
