@@ -8,7 +8,7 @@ import { SettingsModal } from "../modals/settings-modal";
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
 
-  if (isMounted) {
+  if (!isMounted) {
     toast.error("Something went wrong!");
     return null;
   }

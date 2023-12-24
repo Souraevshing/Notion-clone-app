@@ -29,14 +29,16 @@ import { useSettings } from "@/hooks/user-setting";
 import { Navbar } from "./navbar";
 
 const Navigation = () => {
-  const pathname = usePathname();
-  const isMobile = useMediaQuery("(max-width:768px)"); //media query for mobile devices
-  const createNote = useMutation(api.documents.createNote);
-
   //hooks to interact with app
-  const search = useSearch();
+
   const settings = useSettings();
+  const search = useSearch();
   const params = useParams();
+  const pathname = usePathname();
+
+  const isMobile = useMediaQuery("(max-width:768px)"); //media query for mobile devices
+
+  const createNote = useMutation(api.documents.createNote);
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);

@@ -25,6 +25,7 @@ export const SettingsModal = () => {
                 Customize appearance
               </span>
             </div>
+            <ModeToggle />
           </div>
         </DialogContent>
       </Dialog>

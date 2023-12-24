@@ -40,13 +40,12 @@ export const DocumentList = ({
   const documents = useQuery(api.documents.getSidebar, {
     parentDocument: parentDocumentId,
   });
-  console.log(documents);
 
   /**
    * @description redirect to respective document when clicked
    */
   const handleRedirect = (documentId: string) => {
-    //router.push(`/documents/${documentId}`);
+    router.push(`/documents/${documentId}`);
   };
 
   if (documents === undefined) {

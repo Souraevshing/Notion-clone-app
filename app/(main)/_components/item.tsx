@@ -53,8 +53,6 @@ export const Item = ({
 }: ItemProps) => {
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
-  const router = useRouter();
-
   const user = useUser();
 
   const create = useMutation(api.documents.createNote);
@@ -77,11 +75,6 @@ export const Item = ({
     const promise = create({
       title: "Untitled",
       parentDocument: id,
-    }).then((docId) => {
-      if (!expanded) {
-        onExpand?.();
-      }
-      // router.push(`/documents/${docId}`);
     });
 
     toast.promise(promise, {
