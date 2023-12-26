@@ -32,6 +32,7 @@ const Documents = () => {
           width="300"
           alt="empty-light-img"
           className="dark:hidden"
+          priority
         />
 
         <Image

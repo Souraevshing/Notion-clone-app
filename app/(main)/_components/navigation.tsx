@@ -25,7 +25,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useSearch } from "@/hooks/use-search";
-import { useSettings } from "@/hooks/user-setting";
+import { useSettings } from "@/hooks/use-settings";
 import { Navbar } from "./navbar";
 
 const Navigation = () => {

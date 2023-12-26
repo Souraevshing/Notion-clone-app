@@ -153,7 +153,7 @@ export const Item = ({
               <DropdownMenuTrigger onClick={(e) => e.stopPropagation()} asChild>
                 <div
                   role="button"
-                  className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-200 dark:hover:bg-neutral-400"
+                  className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-400 dark:hover:bg-neutral-400"
                 >
                   <MoreHorizontalIcon className="h-4 w-4" />
                 </div>

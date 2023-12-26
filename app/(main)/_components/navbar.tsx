@@ -3,7 +3,6 @@
 import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
 import { MenuIcon } from "lucide-react";
-import { toast } from "sonner";
 
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -37,7 +36,6 @@ export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
   }
 
   if (document === null) {
-    toast.error("Document not found!");
     return null;
   }
 

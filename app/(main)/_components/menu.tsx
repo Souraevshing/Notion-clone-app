@@ -23,7 +23,7 @@ interface MenuProps {
 }
 
 /**
- * @description
+ * @description user menu to delete selected document
  */
 export const Menu = ({ documentId }: MenuProps) => {
   const router = useRouter();
@@ -51,7 +51,7 @@ export const Menu = ({ documentId }: MenuProps) => {
             variant="outline"
             className="cursor-pointer outline-none"
           >
-            <MoreHorizontalIcon className="h-4 w-4" />
+            <MoreHorizontalIcon className="h-4 w-4 outline-none" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
