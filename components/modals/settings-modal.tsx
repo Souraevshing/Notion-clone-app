@@ -3,7 +3,7 @@
 import { useSettings } from "@/hooks/use-settings";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { ModeToggle } from "../toggle-mode";
+import { ToggleMode } from "../toggle-mode";
 
 /**
  * @description setting modal for user
@@ -24,7 +24,7 @@ export const SettingsModal = () => {
               Customize appearance
             </span>
           </div>
-          <ModeToggle />
+          <ToggleMode />
         </div>
       </DialogContent>
     </Dialog>
