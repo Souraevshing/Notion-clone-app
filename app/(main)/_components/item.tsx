@@ -94,9 +94,7 @@ export const Item = ({
       return;
     }
 
-    const promise = archive({ id }).then((documentId) =>
-      router.push("/documents")
-    );
+    const promise = archive({ id }).then(() => router.push("/documents"));
 
     toast.promise(promise, {
       loading: "Deleting note...",
