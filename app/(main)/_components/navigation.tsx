@@ -7,7 +7,7 @@ import {
   Settings2Icon,
   Trash2Icon,
 } from "lucide-react";
-import { usePathname, useParams } from "next/navigation";
+import { usePathname, useParams, useRouter } from "next/navigation";
 import React, { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { useMutation } from "convex/react";
@@ -30,7 +30,7 @@ import { Navbar } from "./navbar";
 
 const Navigation = () => {
   //hooks to interact with app
-
+  const router = useRouter();
   const settings = useSettings();
   const search = useSearch();
   const params = useParams();
@@ -155,7 +155,9 @@ const Navigation = () => {
   }, [pathname, isMobile]);
 
   const handleCreateNote = () => {
-    const promise = createNote({ title: "Untitled" });
+    const promise = createNote({ title: "Untitled" }).then((documentId) =>
+      router.push(`/documents/${documentId}`)
+    );
 
     toast.promise(promise, {
       loading: "Creating note...",

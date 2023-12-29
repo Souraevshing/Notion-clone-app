@@ -53,10 +53,10 @@ export const Item = ({
 }: ItemProps) => {
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
+  const router = useRouter();
   const user = useUser();
 
   const create = useMutation(api.documents.createNote);
-
   const archive = useMutation(api.documents.archiveDocuments);
 
   /**
@@ -75,6 +75,11 @@ export const Item = ({
     const promise = create({
       title: "Untitled",
       parentDocument: id,
+    }).then((documentId) => {
+      if (!expanded) {
+        onExpand?.();
+      }
+      router.push(`/documents/${documentId}`);
     });
 
     toast.promise(promise, {
@@ -88,7 +93,10 @@ export const Item = ({
     if (!id) {
       return;
     }
-    const promise = archive({ id });
+
+    const promise = archive({ id }).then((documentId) =>
+      router.push("/documents")
+    );
 
     toast.promise(promise, {
       loading: "Deleting note...",

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { LucidePlusCircle } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
@@ -11,10 +12,14 @@ import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 
 const Documents = () => {
+  const router = useRouter();
   const { user } = useUser();
   const createNote = useMutation(api.documents.createNote); //call createNote fn and pass it to useMutation hook to create new note
+
   const handleCreateNote = () => {
-    const promise = createNote({ title: "Untitled" });
+    const promise = createNote({ title: "Untitled" }).then((documentId) =>
+      router.push(`/documents/${documentId}`)
+    );
 
     toast.promise(promise, {
       loading: "Creating note...",

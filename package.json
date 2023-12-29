@@ -12,6 +12,8 @@
     "lint:js:fix": "npm run lint:js -- --fix"
   },
   "dependencies": {
+    "@blocknote/core": "^0.10.1",
+    "@blocknote/react": "^0.10.1",
     "@clerk/clerk-react": "^4.30.0",
     "@edgestore/react": "^0.1.6",
     "@edgestore/server": "^0.1.6",
