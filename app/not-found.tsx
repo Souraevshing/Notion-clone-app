@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,14 +22,13 @@ export default function NotFound() {
           height="300"
           width="300"
           className="hidden dark:block"
-        />{" "}
+        />
         <h2 className="text-xl font-medium text-center justify-center flex">
           Something went wrong!
         </h2>
-        <Button asChild>
-          <Link href="/documents" />
-          Back to homepage
-        </Button>
+        <Link href="/documents">
+          <Button asChild>Back to homepage</Button>
+        </Link>
       </div>
     </>
   );
